@@ -249,7 +249,8 @@ def main():
             6. If the output is repeating, clear the session and refresh the page
             7. You can edit the content as needed
             8. Recommended: Upload resume in PDF format and download the formatted version in Word document format
-            9. Testing mode is only for developers, do not turn it on unless you are a developer \n
+            9. Testing mode is only for developers, do not turn it on unless you are a developer 
+            10. The updated version also supports the image based resumes but limited to PDF format only \n
             Happy Hiring!!!!
         """)
         st.markdown("---")
