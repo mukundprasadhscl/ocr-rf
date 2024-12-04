@@ -1,0 +1,11 @@
+python-docx
+streamlit
+PyPDF2
+langchain-google-genai
+python-dotenv
+Pillow
+langchain
+reportlab
+easyocr
+pymupdf
+
