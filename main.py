@@ -118,101 +118,6 @@ def main():
         }
     )
 
-    # Custom CSS with fixed header spacing
-    st.markdown("""
-        <style>
-        .stApp {
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #0A192F;
-        }
-        /* Remove all default padding from the main container */
-        .main .block-container {
-            padding-top: 0 !important;
-            padding-bottom: 1rem !important;
-            max-width: 100% !important;
-        }
-        /* Remove default gaps */
-        .css-18e3th9 {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-        .css-1d391kg {
-            padding-top: 0 !important;
-        }
-        .main-header {
-            text-align: center;
-            padding: 0.5rem 0;
-            color: #FFFFFF;
-            margin: 0;
-        }
-        .main-header h1 {
-            color: #FFFFFF;
-            margin: 0;
-            padding: 0;
-        }
-        .main-header p {
-            color: #FFFFFF;
-            margin: 0.25rem 0 0 0;
-        }
-        .upload-section {
-            background-color: transparent;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 0.5rem 0;
-        }
-        /* Updated sidebar styling */
-        [data-testid="stSidebar"] {
-            width: 250px !important;
-            background-color: #172A46 !important;
-            border-right: 1px solid #234670;
-        }
-        [data-testid="stSidebarNav"] {
-            width: 250px !important;
-        }
-        /* Sidebar content color */
-        [data-testid="stSidebar"] .stMarkdown {
-            color: #E6F1FF;
-        }
-        /* Sidebar header color */
-        [data-testid="stSidebar"] h1, 
-        [data-testid="stSidebar"] h2, 
-        [data-testid="stSidebar"] h3, 
-        [data-testid="stSidebar"] h4 {
-            color: #64FFDA;
-        }
-        /* Remove white background and default header */
-        [data-testid="stAppViewContainer"] {
-            background-color: #0A192F;
-        }
-        [data-testid="stHeader"] {
-            display: none;
-        }
-        [data-testid="stToolbar"] {
-            display: none;
-        }
-        /* Force remove top margin from first element */
-        .element-container:first-child {
-            margin-top: 0 !important;
-        }
-        /* Additional spacing fixes */
-        .stMarkdown {
-            color: #FFFFFF;
-            margin-top: 0 !important;
-        }
-        div[data-testid="stVerticalBlock"] > div:first-child {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-        /* Fix for streamlit containers */
-        .stMarkdown > div:first-child > div:first-child {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
     # Header Section - minimal spacing
     st.markdown("""
         <div class='main-header'>
@@ -912,8 +817,17 @@ def main():
                     st.subheader("📄 Preview")
                     if processed_data.pdf_with_pic:
                         base64_pdf = base64.b64encode(processed_data.pdf_with_pic).decode('utf-8')
-                        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800px" type="application/pdf"></iframe>'
+                        pdf_display = f'''
+                            <object data="data:application/pdf;base64,{base64_pdf}" 
+                                    type="application/pdf" 
+                                    width="100%" 
+                                    height="800px">
+                                <p>Your browser doesn't support PDF viewing. 
+                                <a href="data:application/pdf;base64,{base64_pdf}" download>Download PDF</a> instead.</p>
+                            </object>
+                            '''
                         st.markdown(pdf_display, unsafe_allow_html=True)
+                        
 
                 with download_col:
                     st.subheader("💾 Download Files")
